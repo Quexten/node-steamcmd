@@ -176,3 +176,4 @@ module.exports.touch = touch
 module.exports.prep = prep
 module.exports.getAppInfo = getAppInfo
 module.exports.updateApp = updateApp
+module.exports.run = run

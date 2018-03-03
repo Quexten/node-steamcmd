@@ -7,6 +7,8 @@ var Promise = require('pinkie-promise')
 var request = require('request')
 var child = require('child-process-promise')
 var vdf = require('vdf')
+var unzip = require('unzip')
+var tar = require('tar')
 
 var _ = {}
 _.defaults = require('lodash.defaults')
@@ -21,13 +23,13 @@ var download = function (opts) {
   var extractor
   if (process.platform === 'win32') {
     url = 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip'
-    extractor = require('unzip')
+    extractor = unzip
   } else if (process.platform === 'darwin') {
     url = 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_osx.tar.gz'
-    extractor = require('tar')
+    extractor = tar
   } else if (process.platform === 'linux') {
     url = 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz'
-    extractor = require('tar')
+    extractor = tar
   } else {
     return Promise.reject('Unsupported platform')
   }

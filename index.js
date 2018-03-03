@@ -9,6 +9,7 @@ var child = require('child-process-promise')
 var vdf = require('vdf')
 var unzip = require('unzip')
 var tar = require('tar')
+var zlib = require('zlib')
 
 var _ = {}
 _.defaults = require('lodash.defaults')
@@ -36,7 +37,7 @@ var download = function (opts) {
   return new Promise(function (resolve, reject) {
     var req = request(url)
     if (process.platform !== 'win32') {
-      req = req.pipe(require('zlib').createGunzip())
+      req = req.pipe(zlib.createGunzip())
     }
     req.pipe(extractor.Extract({path: opts.binDir})
       .on('finish', resolve)
